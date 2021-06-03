@@ -16,31 +16,36 @@ Keymap for the Preonic keyboard using the 1x2U layout
 
 
 Helpful links: 
+
 https://github.com/qmk/qmk_firmware/tree/master/keyboards/preonic 
+
 https://github.com/qmk/qmk_firmware/blob/master/keyboards/preonic/keymaps/default/keymap.c 
+
 https://docs.qmk.fm/#/keycodes 
+
 https://config.qmk.fm/#/preonic/rev3/LAYOUT_preonic_1x2uC 
+
 https://docs.qmk.fm/#/newbs 
 
 
 
 After QMK MSYS is installed and running:
 
-$ qmk setup
-y
+        $ qmk setup
+        y
 
-$ qmk new-keymap
-Keyboard Name: preonic
-Keymap Name: feralpacket
-Ψ feralpacket keymap directory created in: C:/Users/feralpacket/qmk_firmware/keyboards/preonic/keymaps/feralpacket
-Ψ Compile a firmware with your new keymap by typing:
+        $ qmk new-keymap
+        Keyboard Name: preonic
+        Keymap Name: feralpacket
+        Ψ feralpacket keymap directory created in: C:/Users/feralpacket/qmk_firmware/keyboards/preonic/keymaps/feralpacket
+        Ψ Compile a firmware with your new keymap by typing:
 
         qmk compile -kb preonic -km feralpacket
 
 ! Edit keymap.c, located in %USERPROFILE\qmk_firmware\keyboards\preonic\keymaps\feralpacket.
 
 ! This should work, but doesn't at the momenet.  See below
-qmk compile -kb preonic/rev3 -kb feralpacket
+        qmk compile -kb preonic/rev3 -kb feralpacket
 
 
 
@@ -48,8 +53,8 @@ Ran into this problem while compiling. The workaround worked.
 
 https://www.reddit.com/r/olkb/comments/n7bj77/qmk_not_compiling_property/
 
-which gmake
-which make
-pwd
-cd qmk_firmware
-make preonic/rev3:feralpacket
+        which gmake
+        which make
+        pwd
+        cd qmk_firmware
+        make preonic/rev3:feralpacket
