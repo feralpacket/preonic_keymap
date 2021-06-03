@@ -44,7 +44,8 @@ After QMK MSYS is installed and running:
 
 Edit keymap.c, located in %USERPROFILE\qmk_firmware\keyboards\preonic\keymaps\feralpacket.
 
-This should work, but doesn't at the moment.  See below
+This should work, but doesn't at the moment.  See below.
+
         qmk compile -kb preonic/rev3 -kb feralpacket
 
 
