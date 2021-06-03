@@ -5,8 +5,9 @@
     // #define STARTUP_SONG SONG(NO_SOUND)
 
     #define DEFAULT_LAYER_SONGS { SONG(IMPERIAL_MARCH), \
-									SONG(CLOSE_ENCOUNTERS_5_NOTE) \
-                                }
+				SONG(ZELDA_TREASURE), \
+				SONG(CLOSE_ENCOUNTERS_5_NOTE) \
+				}
 #endif
 
 #define MUSIC_MASK (keycode != KC_NO)
