@@ -15,12 +15,12 @@ Keymap for the Preonic keyboard using the 1x2U layout
 - Removed the DVORAK and COLEMAK layers.
 
 
-Helpful links:
-https://github.com/qmk/qmk_firmware/tree/master/keyboards/preonic
-https://github.com/qmk/qmk_firmware/blob/master/keyboards/preonic/keymaps/default/keymap.c
-https://docs.qmk.fm/#/keycodes
-https://config.qmk.fm/#/preonic/rev3/LAYOUT_preonic_1x2uC
-https://docs.qmk.fm/#/newbs
+Helpful links: 
+https://github.com/qmk/qmk_firmware/tree/master/keyboards/preonic 
+https://github.com/qmk/qmk_firmware/blob/master/keyboards/preonic/keymaps/default/keymap.c 
+https://docs.qmk.fm/#/keycodes 
+https://config.qmk.fm/#/preonic/rev3/LAYOUT_preonic_1x2uC 
+https://docs.qmk.fm/#/newbs 
 
 
 
