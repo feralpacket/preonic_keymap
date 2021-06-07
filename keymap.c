@@ -159,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_1x2uC(
   _______, RESET,   DEBUG,   AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______, _______, _______, _______, _______,
   _______, QWERTY,  MU_MOD,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF,LALT(KC_PSCR), LCTL(KC_PSCR), KC_PSCR,
-  KC_CAPS, MUV_DE,  MUV_IN,  _______, _______, GAME,    _______, _______, _______, _______, _______, _______,
+  KC_CAPS, MUV_DE,  MUV_IN,  _______, KC_LEAD, GAME,    _______, _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, SRS,     NUMPAD,  _______, _______, _______, _______, _______,
   _______, _______, _______, _______, _______,      _______,     _______, _______, _______, _______, _______
 )
@@ -230,7 +230,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           } else {
             // when keycode SRS is released
           }
-          return false;
+		  return false;
           break;
       }
     return true;
@@ -287,8 +287,21 @@ void dip_switch_update_user(uint8_t index, bool active) {
     }
 }
 
+LEADER_EXTERNS();
 
 void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+    SEQ_THREE_KEYS(KC_S, KC_R, KC_S) {
+      // alias exec srs show run | se
+      SEND_STRING("sh run | se ");
+    }
+    SEQ_THREE_KEYS(KC_S, KC_R, KC_B) {
+      // alias exec srb show run | be
+      SEND_STRING("sh run | be ");
+    }
+  }
 #ifdef AUDIO_ENABLE
     if (muse_mode) {
         if (muse_counter == 0) {
@@ -318,3 +331,4 @@ bool music_mask_user(uint16_t keycode) {
       return true;
   }
 }
+
