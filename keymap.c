@@ -225,12 +225,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case SRS:
           if (record->event.pressed) {
-            // when keycode QMKBEST is pressed
+            // when keycode SRS is pressed
             SEND_STRING("su run | se ");
           } else {
             // when keycode SRS is released
           }
-		  return false;
+          return false;
           break;
       }
     return true;
