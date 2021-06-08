@@ -59,7 +59,7 @@ make preonic/rev3:feralpacket
 ```
 
 ### Cisco Aliases Emulated with Leader Key
-I'm using the Leader Key feature to emulate the alias commands available in Cisco IOS.  The LEADER_TIMEOUT is set to 2000 ms (this will change as I get use to this feature).  Meaning, you have up to 2 seconds between key presses.  After the key sequence is pressed, wait 2 seconds and the alias will be sent as a string of text.  Do not hit enter after entering the key sequence.  Change the timeout as necessary in the config.h file.
+I'm using the Leader Key feature to emulate the alias commands available in Cisco IOS.  The LEADER_TIMEOUT is set to 2000 ms (this will change as I get use to this feature).  Meaning, you have up to 2 seconds between key presses.  After the key sequence is pressed, wait 2 seconds and the alias will be sent as a string of text.  Do not hit enter after pressing the key sequence.  Change the timeout as necessary in the config.h file.
 
 To use this feature, press the leader_key and then press the key sequence in order.  Wait 2 seconds.  Look at the keymap.c file to see which key KC_LEAD is associated with (I'll probably move it around a few times).  Change the key KC_LEAD is associated with as necessary.   
 
