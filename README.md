@@ -59,11 +59,11 @@ make preonic/rev3:feralpacket
 ```
 
 ### Cisco Aliases Emulated with Leader Key
-Used the Leader Key feature to emulate the alias commands available in Cisco IOS.  The LEADER_TIMEOUT is set to 2000 ms.  Meaning, you have up to 2 seconds between key presses.  After the key sequence is pressed, wait 2 seconds and the alias will be sent as a string of text.  Change as necessary.
+I'm using the Leader Key feature to emulate the alias commands available in Cisco IOS.  The LEADER_TIMEOUT is set to 2000 ms (this will change as I get use to this feature).  Meaning, you have up to 2 seconds between key presses.  After the key sequence is pressed, wait 2 seconds and the alias will be sent as a string of text.  Do not hit enter after entering the key sequence.  Change the timeout as necessary in the config.h file.
 
-To use this feature, press the leader_key and then press the key sequence in order.  Wait 2 seconds.  Look at the keymap.c file to see which key KC_LEAD is associated with.  Change as necessary.   
+To use this feature, press the leader_key and then press the key sequence in order.  Wait 2 seconds.  Look at the keymap.c file to see which key KC_LEAD is associated with (I'll probably move it around a few times).  Change the key KC_LEAD is associated with as necessary.   
 
-I've used the mneumonic convention of using one character for each command word.  There are a few that deviate.  The big one is the "show archive" command using the alias "diff".  I didn't create key sequences for do commands while in configuration mode.  When in configuration mode, type "do " (include a space after "do"), then the leader_key, then the key sequence.
+I've used the mneumonic convention of using one character for each command word.  The command "show ip interface brief" is configured with the alias or key sequence of "siib".  There are a few that deviate.  The big one difference, the "show archive" command is using the key sequence "diff".  I didn't create key sequences for any do commands while in configuration mode.  When in configuration mode, type "do " (include a space after "do"), then the leader_key, then the key sequence.
 
 - https://thomasbaart.nl/2018/12/20/qmk-basics-leader-key/
 
