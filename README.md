@@ -13,6 +13,7 @@ Keymap for the Preonic keyboard using the 1x2U layout
 - Changed the layer songs in config.h.
 - Created the user_song_list.h file.
 - Removed the DVORAK and COLEMAK layers.
+- Added a leader key modifier and configured sequences to mimic the Cisco alias commands.
 
 
 ### Helpful links
