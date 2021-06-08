@@ -287,19 +287,440 @@ void dip_switch_update_user(uint8_t index, bool active) {
     }
 }
 
+bool did_leader_succeed;
+#ifdef AUDIO_ENABLE
+//float leader_start_song[][2] = SONG(CHROMATIC_SOUND);
+float leader_start_song[][2] = SONG(NO_SOUND);
+float leader_succeed_song[][2] = SONG(STARTUP_SOUND);
+//float leader_fail_song[][2] = SONG(GOODBYE_SOUND);
+float leader_fail_song[][2] = SONG(NO_SOUND);
+#endif
+
 LEADER_EXTERNS();
 
 void matrix_scan_user(void) {
   LEADER_DICTIONARY() {
+    did_leader_succeed = leading = false;
     leading = false;
     leader_end();
-    SEQ_THREE_KEYS(KC_S, KC_R, KC_S) {
-      // alias exec srs show run | se
-      SEND_STRING("sh run | se ");
+/*
+ *  configure aliases
+ */
+    SEQ_TWO_KEYS(KC_C, KC_T) {
+      // alias exec ct configure terminal
+      SEND_STRING("configure terminal ");
+	  did_leader_succeed = true;
+    }
+    SEQ_TWO_KEYS(KC_R, KC_B) {
+      // alias configure rb router bgp
+	  // incomplete command by itself
+      SEND_STRING("router ospf bgp ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_TWO_KEYS(KC_R, KC_E) {
+      // alias configure re router eigrp
+	  // incomplete command by itself
+      SEND_STRING("router eigrp ? ");
+	  did_leader_succeed = true;
+    }	
+    SEQ_TWO_KEYS(KC_R, KC_O) {
+      // alias configure ro router ospf
+	  // incomplete command by itself
+      SEND_STRING("router ospf ? ");
+	  did_leader_succeed = true;
+    }
+      // looking for do show commands?  type "do <leader-key> alias"
+/*
+ *  show running-config aliases
+ */
+    SEQ_TWO_KEYS(KC_S, KC_R) {
+      // alias exec sr show running-config
+      SEND_STRING("show running-config ");
+	  did_leader_succeed = true;
     }
     SEQ_THREE_KEYS(KC_S, KC_R, KC_B) {
-      // alias exec srb show run | be
-      SEND_STRING("sh run | be ");
+      // alias exec srb show running-config | begin
+	  // % Incomplete command
+      SEND_STRING("show running-config | begin ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_R, KC_I) {
+      // alias exec sri show running-config | include
+	  // % Incomplete command
+      SEND_STRING("show running-config | include ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_R, KC_S) {
+      // alias exec srs show running-config | section
+	  // % Incomplete command
+      SEND_STRING("show running-config | section ? ");
+	  did_leader_succeed = true;
+    }	
+    SEQ_THREE_KEYS(KC_S, KC_R, KC_I) {
+      // alias exec sri show running-config interface
+	  // % Incomplete command
+      SEND_STRING("show running-config interface ? ");
+	  did_leader_succeed = true;
+    }	
+    SEQ_FIVE_KEYS(KC_S, KC_R, KC_A, KC_A, KC_A) {
+      // alias exec sraaa show running-config | include aaa|auth|radius|tacacs
+      SEND_STRING("show running-config | include aaa|auth|radius|tacacs ");
+	  did_leader_succeed = true;
+    }
+/*
+ *  general troubleshooting aliases
+ */
+    SEQ_TWO_KEYS(KC_S, KC_V) {
+      // alias exec sv show version
+      SEND_STRING("show version ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_V, KC_R) {
+      // alias exec svr show version | include reason|uptime
+	  // doesn't follow the one letter for each word convention
+      SEND_STRING("show version | include reason|uptime ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_S) {
+      // alias exec sis show interface status
+      SEND_STRING("show interface status ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_T) {
+      // alias exec sit show interface trunk
+      SEND_STRING("show interface trunk ");
+	  did_leader_succeed = true;
+	}
+    SEQ_TWO_KEYS(KC_S, KC_E) {
+      // alias exec se show etherchannel 
+      SEND_STRING("show etherchannel ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_E, KC_S) {
+      // alias exec ses show etherchannel summary
+      SEND_STRING("show etherchannel summary ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_I, KC_B) {
+      // alias exec siib show ip interface brief
+      SEND_STRING("show ip interface brief ");
+	  did_leader_succeed = true;
+	}
+    SEQ_TWO_KEYS(KC_S, KC_C) {
+      // alias exec sc show clock
+      SEND_STRING("show clock ");
+	  did_leader_succeed = true;
+	}
+    SEQ_TWO_KEYS(KC_S, KC_L) {
+      // alias exec sl show logging
+      SEND_STRING("show logging ");
+	  did_leader_succeed = true;
+	}
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_A) {
+      // alias exec sia show ip arp
+      SEND_STRING("show ip arp ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_M, KC_A) {
+      // alias exec sma show mac address-table
+      SEND_STRING("show mac address-table ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_I, KC_D, KC_S, KC_B) {
+      // alias exec sidsb show ip dhcp snooping binding
+      SEND_STRING("show ip dhcp snooping binding ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_P, KC_I) {
+      // alias exec spi show power inline
+      SEND_STRING("show power inline ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_C, KC_N) {
+      // alias exec scn show cdp neighbor
+      SEND_STRING("show cdp neighbor ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_D, KC_I, KC_F, KC_F) {
+      // alias exec diff show archive config differences nvram:startup-config system:running-config
+	  // doesn't follow the one letter for each word convention
+      SEND_STRING("show archive config differences nvram:startup-config system:running-config ");
+	  did_leader_succeed = true;
+	}
+/*
+ *  routing aliases
+ */
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_P) {
+      // alias exec sip show ip protocol
+      SEND_STRING("show ip protocol ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_R) {
+      // alias exec sir show ip route
+      SEND_STRING("show ip route ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_B) {
+      // alias exec sib show ip bgp
+      SEND_STRING("show ip bgp ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_B, KC_N) {
+      // alias exec sibn show ip bgp neighbors
+      SEND_STRING("show ip bgp neighbors ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_B, KC_S) {
+      // alias exec sibs show ip bgp summary
+      SEND_STRING("show ip bgp summary ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_B, KC_V, KC_U, KC_A) {
+      // alias exec sbvua show bgp vpnv4 unicast all
+      SEND_STRING("show bgp vpnv4 unicast all ");
+	  did_leader_succeed = true;
+	}
+    SEQ_FIVE_KEYS(KC_S, KC_B, KC_V, KC_U, KC_V) {
+      // alias exec sbvua show bgp vpnv4 unicast vrf
+	  // % Incomplete command
+      SEND_STRING("show bgp vpnv4 unicast vrf ? ");
+	  did_leader_succeed = true;
+	}
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_E) {
+      // alias exec sie show ip eigrp
+	  // % Incomplete command
+      SEND_STRING("show ip eigrp ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_E, KC_I) {
+      // alias exec siei show ip eigrp interface
+      SEND_STRING("show ip eigrp interface ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_E, KC_N) {
+      // alias exec sien show ip eigrp neighbors
+      SEND_STRING("show ip eigrp neighbors ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_E, KC_T) {
+      // alias exec siet show ip eigrp topology
+      SEND_STRING("show ip eigrp topology ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_O) {
+      // alias exec sio show ip ospf
+      SEND_STRING("show ip ospf ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_O, KC_D) {
+      // alias exec siod show ip ospf database
+      SEND_STRING("show ip ospf database ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_O, KC_I) {
+      // alias exec sioi show ip ospf interface
+      SEND_STRING("show ip ospf interface ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_O, KC_N) {
+      // alias exec sion show ip ospf neighbor
+      SEND_STRING("show ip ospf neighbor ");
+	  did_leader_succeed = true;
+    }
+/*
+ *  mpls aliases
+ */
+    SEQ_TWO_KEYS(KC_S, KC_M) {
+      // alias exec sm show mpls
+	  // % Incomplete command
+      SEND_STRING("show mpls ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_M, KC_I) {
+      // alias exec smi show mpls interface
+      SEND_STRING("show mpls interface ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_M, KC_L) {
+      // alias exec sml show mpls ldp
+	  // % Incomplete command
+      SEND_STRING("show mpls ldp ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_M, KC_L, KC_N) {
+      // alias exec smln show mpls ldp neighbor
+      SEND_STRING("show mpls ldp neighbor ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_M, KC_F) {
+      // alias exec smf show mpls forwarding-table
+      SEND_STRING("show mpls forwarding-table ");
+	  did_leader_succeed = true;
+    }
+/*
+ *  multicast aliases
+ */
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_P, KC_I) {
+      // alias exec sipi show ip pim interface
+      SEND_STRING("show ip pim interface ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_P, KC_N) {
+      // alias exec sipn show ip pim neighbor
+      SEND_STRING("show ip pim neighbor ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_I, KC_P, KC_R) {
+      // alias exec sipr show ip pim rp
+      SEND_STRING("show ip pim rp ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_I, KC_M) {
+      // alias exec sim show ip mroute
+      SEND_STRING("show ip mroute ");
+	  did_leader_succeed = true;
+    }
+/*
+ *  device-tracking aliases
+ */
+    SEQ_THREE_KEYS(KC_S, KC_D, KC_D) {
+      // alias exec sdd show device-tracking database
+      SEND_STRING("show device-tracking database ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_D, KC_D, KC_I) {
+      // alias exec sddi show device-tracking database interface
+      SEND_STRING("show device-tracking database interface ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_D, KC_D, KC_M) {
+      // alias exec sddm show device-tracking database mac
+      SEND_STRING("show device-tracking database mac ");
+	  did_leader_succeed = true;
+    }
+/*
+ *  lisp aliases
+ */
+    SEQ_THREE_KEYS(KC_S, KC_L, KC_I) {
+      // alias exec sli show lisp interface-id
+	  // % Incomplete command
+      SEND_STRING("show lisp instance-id ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_L, KC_I, KC_I) {
+      // alias exec slii show lisp interface-id * ipv4
+      SEND_STRING("show lisp instance-id * ipv4 ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_I, KC_D) {
+      // alias exec sliid show lisp interface-id * ipv4 database
+      SEND_STRING("show lisp instance-id * ipv4 database ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_I, KC_M) {
+      // alias exec sliim show lisp interface-id * ipv4 map-cache
+      SEND_STRING("show lisp instance-id * ipv4 map-cache ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_I, KC_S) {
+      // alias exec sliis show lisp interface-id * ipv4 server
+      SEND_STRING("show lisp instance-id * ipv4 server ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_L, KC_I, KC_E) {
+      // alias exec slie show lisp interface-id * ethernet
+      SEND_STRING("show lisp instance-id * ethernet ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_E, KC_D) {
+      // alias exec slied show lisp interface-id * ethernet database
+      SEND_STRING("show lisp instance-id * ethernet database ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_E, KC_M) {
+      // alias exec sliem show lisp interface-id * ethernet map-cache
+      SEND_STRING("show lisp instance-id * ethernet map-cache ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_E, KC_A) {
+      // alias exec sliea show lisp interface-id * ethernet address-resolution
+      SEND_STRING("show lisp instance-id * ethernet address-resolution ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_L, KC_I, KC_E, KC_R) {
+      // alias exec slier show lisp interface-id * ethernet address-resolution registration-history
+	  // doesn't follow the one letter for each word convention
+      SEND_STRING("show lisp instance-id * ethernet address-resolution registration-history ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_L, KC_S, KC_R) {
+      // alias exec slsr show lisp server registration-history
+      SEND_STRING("show lisp server registration-history ");
+	  did_leader_succeed = true;
+    }
+/*
+ *  sd-wan aliases
+ */
+    SEQ_TWO_KEYS(KC_S, KC_S) {
+      // alias exec ss show sdwan ?
+	  // % Incomplete command
+      SEND_STRING("show sdwan ? ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_S, KC_C, KC_C) {
+      // alias exec sscc show sdwan control connections
+      SEND_STRING("show sdwan control connections ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_S, KC_C, KC_C, KC_H) {
+      // alias exec sscch show sdwan control connection-history
+      SEND_STRING("show sdwan control connection-history ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_S, KC_B, KC_H) {
+      // alias exec ssbh show sdwan bfd history
+      SEND_STRING("show sdwan bfd history ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_S, KC_B, KC_S) {
+      // alias exec ssbs show sdwan bfd session
+      SEND_STRING("show sdwan bfd session ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_S, KC_O, KC_P) {
+      // alias exec ssop show sdwan omp peers
+      SEND_STRING("show sdwan bfd session ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_S, KC_O, KC_R) {
+      // alias exec ssor show sdwan omp routes
+      SEND_STRING("show sdwan bfd session ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_S, KC_P, KC_A, KC_A) {
+      // alias exec sspaa show sdwan policy access-list-associations
+      SEND_STRING("show sdwan policy access-list-associations ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_S, KC_P, KC_A, KC_C) {
+      // alias exec sspac show sdwan policy access-list-counters
+      SEND_STRING("show sdwan policy access-list-counters ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_S, KC_P, KC_F, KC_V) {
+      // alias exec sspfv show sdwan policy from-vsmart
+      SEND_STRING("show sdwan policy from-vsmart ");
+	  did_leader_succeed = true;
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_S, KC_S, KC_S) {
+      // alias exec ssss show sdwan system status
+      SEND_STRING("show sdwan system status ");
+	  did_leader_succeed = true;
+    }
+    SEQ_THREE_KEYS(KC_S, KC_S, KC_R) {
+      // alias exec ssr show sdwan running-config
+      SEND_STRING("show sdwan running-config ");
+	  did_leader_succeed = true;
     }
   }
 #ifdef AUDIO_ENABLE
@@ -332,3 +753,20 @@ bool music_mask_user(uint16_t keycode) {
   }
 }
 
+void leader_start(void) {
+#ifdef AUDIO_ENABLE
+    PLAY_SONG(leader_start_song);
+#endif
+}
+
+void leader_end(void) {
+  if (did_leader_succeed) {
+#ifdef AUDIO_ENABLE
+    PLAY_SONG(leader_succeed_song);
+#endif
+  } else {
+#ifdef AUDIO_ENABLE
+    PLAY_SONG(leader_fail_song);
+#endif
+  }
+}
