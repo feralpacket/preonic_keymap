@@ -168,6 +168,8 @@ The aliases that I've configured:
     alias exec sr show run
     alias exec srb show run | be
     alias exec sri show run | in
+    alias exec srs show run | se
+    alias exed srint show run interface
     alias exec sraaa show runnning-config | section aaa|auth|radius|tacacs
     !
     alias exec sip show ip protocol
