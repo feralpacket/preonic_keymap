@@ -214,6 +214,7 @@ The aliases that I've configured:
     alias exec sec show etherchannel summary
     alias exec sv show version
     alias exec svr show version | include reason|uptime
+    alias exec sc show clock
     alias exec sl show logging
     alias exec sia show ip arp
     alias exec smt show mac address-table
