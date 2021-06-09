@@ -356,9 +356,11 @@ void matrix_scan_user(void) {
       SEND_STRING("show running-config | section ? ");
 	  did_leader_succeed = true;
     }	
-    SEQ_THREE_KEYS(KC_S, KC_R, KC_I) {
-      // alias exec sri show running-config interface
+    SEQ_FIVE_KEYS(KC_S, KC_R, KC_I,KC_N,KC_T) {
+      // alias exec srint show running-config interface
 	  // % Incomplete command
+	  // doesn't follow the one letter for each word convention
+	  // conflicted with the key sequence used for show running-config | include
       SEND_STRING("show running-config interface ? ");
 	  did_leader_succeed = true;
     }	
