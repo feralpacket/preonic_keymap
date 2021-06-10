@@ -1,5 +1,5 @@
 # preonic_keymap
-Keymap for the Preonic keyboard using the 1x2U layout
+Keymap for the Preonic keyboard using the 1x2Uc layout
 
 - Kept the planck number and symbol row.
 - Changed Enter to KC_SFTENT, tap for Enter and hold for Shift.
