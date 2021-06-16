@@ -14,7 +14,7 @@ Keymap for the Preonic keyboard using the 1x2Uc layout
 - Created the user_song_list.h file.
 - Removed the DVORAK and COLEMAK layers.
 - Added a leader key modifier and configured sequences to mimic the Cisco alias commands.
-- Replaced the _______ ( 7 underscores ) aliases for TRANSPARENT for KC_NO so that removing KC_LGUI in the GAME layer actually works.
+- Replaced the _______ ( 7 underscores ) aliases for TRANSPARENT with KC_NO so that removing KC_LGUI in the GAME layer actually works.
 
 
 ### Helpful links
