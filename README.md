@@ -185,8 +185,10 @@ The aliases that I've configured:
     alias exec sib show ip bgp
     alias exec sibn show ip bgp neighbor
     alias exec sibs show ip bgp summary
-    alias exec sbvua show bgp vpnv4 unicast all
-    alias exec sbvuv show bgp vpvnr unicast vrf
+    alias exec sbi4u show bgp ipv4 unicast
+    alias exec sbi6u show bgp ipv6 unicast
+    alias exec sbv4u show bgp vpnv4 unicast
+    alias exec sbv6u show bgp vpvn6 unicast
     !
     alias exec sio show ip ospf
     alias exec siod show ip ospf database
