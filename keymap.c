@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |M BTN1| M UP |M BTN2|M BTN3|      |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |M LEFT| M DN |M RGT |      |      |      |   ,  |   .  |      | Enter|
+ * | Shift|      |M LEFT| M DN |M RGT |      |      |      |   ,  |   .  |      | Enter|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
   KC_NO,   KC_NO,   KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN3, KC_NO,   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-  KC_NO,   KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  KC_NO,   KC_ENT,
+  KC_LSFT, KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  KC_NO,   KC_ENT,
   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TRNS,      KC_SPC,      KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |PRTSC |SCRLK |Pause |      |      |      |   -  |   =  |   [  |   ]  |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      | Ins  | Home |PG UP |      |      |      |      |   ,  |   .  |      | Enter|
+ * | Shift| Ins  | Home |PG UP |      |      |      |      |   ,  |   .  |      | Enter|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | Del  | End  |PG DN |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   KC_NO,   KC_PSCR, KC_SLCK, KC_PAUS, KC_NO,   KC_NO,   KC_NO,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-  KC_NO,   KC_INS,  KC_HOME, KC_PGUP, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  KC_NO,   KC_ENT,
+  KC_LSFT, KC_INS,  KC_HOME, KC_PGUP, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  KC_NO,   KC_ENT,
   KC_NO,   KC_DEL,  KC_END,  KC_PGDN, KC_TRNS,     KC_SPC,       KC_TRNS, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
@@ -149,9 +149,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |Qwerty|MusCyc|Mus on|MusOff|MidiOn|MidOff|TermOn|TerOff| aPscr| sPscr| Pscr |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Caps |Voice-|Voice+|      |      | Game |      |      |      |      |      |      |
+ * | Caps |Voice-|Voice+|      |Leader| Game |      |      |      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |LEADER|Numpad|      |      |      |      |      |
+ * | Shift|      |      |      |      | SRS  |Numpad|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_NO,   RESET,   DEBUG,   AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   
   KC_NO,   QWERTY,  MU_MOD,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF,LALT(KC_PSCR), LCTL(KC_PSCR), KC_PSCR,
   KC_CAPS, MUV_DE,  MUV_IN,  KC_NO,   KC_LEAD, GAME,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-  KC_NO,   KC_NO,   KC_NO,   RGB_TOG, RGB_MOD, SRS,     NUMPAD,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+  KC_LSFT, KC_NO,   KC_NO,   RGB_TOG, RGB_MOD, SRS,     NUMPAD,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TRNS,      KC_SPC,      KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO
 )
 
@@ -477,17 +477,26 @@ void matrix_scan_user(void) {
       SEND_STRING("show ip bgp summary ");
 	  did_leader_succeed = true;
     }
-    SEQ_FIVE_KEYS(KC_S, KC_B, KC_V, KC_U, KC_A) {
-      // alias exec sbvua show bgp vpnv4 unicast all
-      SEND_STRING("show bgp vpnv4 unicast all ");
+    SEQ_FIVE_KEYS(KC_S, KC_B, KC_I, KC_4, KC_U) {
+      // alias exec sbi4u shpw bgp ipv4 unicast
+      SEND_STRING("show bgp ipv4 unicast ");
 	  did_leader_succeed = true;
-	}
-    SEQ_FIVE_KEYS(KC_S, KC_B, KC_V, KC_U, KC_V) {
-      // alias exec sbvua show bgp vpnv4 unicast vrf
-	  // % Incomplete command
-      SEND_STRING("show bgp vpnv4 unicast vrf ? ");
+    }
+    SEQ_FIVE_KEYS(KC_S, KC_B, KC_I, KC_6, KC_U) {
+      // alias exec sbi6u shpw bgp ipv6 unicast
+      SEND_STRING("show bgp ipv6 unicast ");
 	  did_leader_succeed = true;
-	}
+    }
+	SEQ_FIVE_KEYS(KC_S, KC_B, KC_V, KC_4, KC_U) {
+      // alias exec sbv4u show bgp vpnv4 unicast
+      SEND_STRING("show bgp vpnv4 unicast ");
+	  did_leader_succeed = true;
+    }
+	SEQ_FIVE_KEYS(KC_S, KC_B, KC_V, KC_6, KC_U) {
+      // alias exec sbv6u show bgp vpnv6 unicast
+      SEND_STRING("show bgp vpnv6 unicast ");
+	  did_leader_succeed = true;
+    }
     SEQ_THREE_KEYS(KC_S, KC_I, KC_E) {
       // alias exec sie show ip eigrp
 	  // % Incomplete command
