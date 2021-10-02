@@ -314,7 +314,7 @@ void matrix_scan_user(void) {
     SEQ_TWO_KEYS(KC_R, KC_B) {
       // alias configure rb router bgp
 	  // incomplete command by itself
-      SEND_STRING("router ospf bgp ? ");
+      SEND_STRING("router bgp ? ");
 	  did_leader_succeed = true;
     }
     SEQ_TWO_KEYS(KC_R, KC_E) {
